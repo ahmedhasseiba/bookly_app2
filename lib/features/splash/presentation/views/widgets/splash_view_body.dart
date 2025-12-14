@@ -1,18 +1,64 @@
+import 'package:bookly_app2/core/utils/app_routers.dart';
 import 'package:bookly_app2/core/utils/assets.dart';
+import 'package:bookly_app2/features/splash/presentation/views/widgets/sliding_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class SplashViewBody extends StatelessWidget {
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
 
-        children: [Image.asset(AssetsData.logo)],
-      ),
+class _SplashViewBodyState extends State<SplashViewBody>
+    with SingleTickerProviderStateMixin {
+  late AnimationController anmimationController;
+  late Animation<Offset> slidingAnimation;
+  @override
+  void initState() {
+    super.initState();
+    initSlidingAnimation();
+    navigateToHome();
+  }
+
+  @override
+  void dispose() {
+    anmimationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+
+      children: [
+        Image.asset(AssetsData.logo),
+        SlidingText(
+          anmimationController: anmimationController,
+          slidingAnimation: slidingAnimation,
+        ),
+      ],
     );
+  }
+
+  void navigateToHome() {
+    Future.delayed(Duration(seconds: 3), () {
+      GoRouter.of(context).push(AppRouters.kHomeView);
+    });
+  }
+
+  void initSlidingAnimation() {
+    anmimationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    slidingAnimation = Tween<Offset>(
+      begin: Offset(0, 2),
+      end: Offset.zero,
+    ).animate(anmimationController);
+    anmimationController.forward();
   }
 }
