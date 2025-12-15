@@ -3,12 +3,14 @@ import 'package:bookly_app2/core/utils/api_service.dart';
 import 'package:bookly_app2/features/splash/presentation/views/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app2/features/splash/presentation/views/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class HomeRepoImpl implements HomeRepo {
   final ApiService apiService;
 
   HomeRepoImpl(this.apiService);
-  Future<Either<Failure, List<BookModel>>> fetchNewestBook() async {
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchNewsetBook() async {
     try {
       var data = await apiService.get(
         endpoint:
@@ -20,20 +22,16 @@ class HomeRepoImpl implements HomeRepo {
       }
       return Right(books);
     } catch (e) {
-      return Left(ServerFailure());
-      // TODO
+      if (e is DioError) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
     }
   }
 
   @override
   Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() {
     // TODO: implement fetchFeaturedBooks
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, List<BookModel>>> fetchNewsetBook() {
-    // TODO: implement fetchNewsetBook
     throw UnimplementedError();
   }
 }
