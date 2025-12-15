@@ -29,8 +29,7 @@ class ServerFailure extends Failure {
       case DioErrorType.badCertificate:
         return ServerFailure('Bad SSL certificate');
       case DioErrorType.connectionError:
-      return ServerFailure("Opps there was an error, Please try later!");
-    
+        return ServerFailure("Opps there was an error, Please try later!");
     }
   }
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
