@@ -58,7 +58,7 @@ class BookListViewItem extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(width: 90),
+                      SizedBox(width: 60),
 
                       BookRating(),
                     ],
