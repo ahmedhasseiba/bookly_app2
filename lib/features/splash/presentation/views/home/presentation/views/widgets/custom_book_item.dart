@@ -1,4 +1,3 @@
-import 'package:bookly_app2/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 class CustomBookItem extends StatelessWidget {
