@@ -14,7 +14,10 @@ class BooksDetailsSection extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.17),
-          child: CustomBookItem(),
+          child: CustomBookItem(
+            imageUrl:
+                'https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.istockphoto.com/photos/book-search&ved=2ahUKEwjM0rCxvcKRAxV22gIHHcqFGq0Qh-wKegQIGRAE&usg=AOvVaw1dywG_RGpkDpAZ4OS4OW7_',
+          ),
         ),
         SizedBox(height: 43),
         Text('The Jungle Book', style: Styles.textStyle30),

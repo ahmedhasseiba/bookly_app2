@@ -18,7 +18,7 @@ final class FeaturedBooksCubitFailure extends FeaturedBooksCubitState {
 }
 
 final class FeaturedBooksCubitSuccess extends FeaturedBooksCubitState {
-  final List<BookModel> Books;
+  final List<BookModel> books;
 
-  const FeaturedBooksCubitSuccess(this.Books);
+  const FeaturedBooksCubitSuccess(this.books);
 }
